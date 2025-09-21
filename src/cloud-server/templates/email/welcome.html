@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to ArchBuilder.AI</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #ffffff;
+            margin: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .welcome-message h2 {
+            color: #2d3748;
+            font-size: 24px;
+            margin: 0 0 15px 0;
+        }
+        .features {
+            margin: 30px 0;
+        }
+        .feature {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f7fafc;
+            border-radius: 8px;
+        }
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 20px;
+        }
+        .feature-content h3 {
+            margin: 0 0 5px 0;
+            color: #2d3748;
+            font-size: 16px;
+        }
+        .feature-content p {
+            margin: 0;
+            color: #718096;
+            font-size: 14px;
+        }
+        .cta-button {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .cta-button a {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .footer {
+            background-color: #f7fafc;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+        .footer p {
+            margin: 5px 0;
+            color: #718096;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏗️ ArchBuilder.AI</h1>
+            <p>AI-Powered Architectural Design Automation</p>
+        </div>
+        
+        <div class="content">
+            <div class="welcome-message">
+                <h2>Welcome{{ ', ' + recipient_name if recipient_name and recipient_name != 'Valued User' else '' }}!</h2>
+                <p>Thank you for joining ArchBuilder.AI. We're excited to help you revolutionize your architectural design process with the power of artificial intelligence.</p>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🤖</div>
+                    <div class="feature-content">
+                        <h3>AI-Powered Design</h3>
+                        <p>Generate architectural layouts using natural language descriptions and intelligent algorithms.</p>
+                    </div>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📐</div>
+                    <div class="feature-content">
+                        <h3>Multi-Format Support</h3>
+                        <p>Work with DWG, DXF, IFC, PDF regulations, and seamlessly integrate with Revit.</p>
+                    </div>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🌍</div>
+                    <div class="feature-content">
+                        <h3>Global Compliance</h3>
+                        <p>Ensure your designs meet international building codes and local regulations.</p>
+                    </div>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-content">
+                        <h3>Rapid Iteration</h3>
+                        <p>Quickly iterate and refine your designs with AI-generated suggestions and optimizations.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cta-button">
+                <a href="{{ base_url }}/dashboard">Start Building Now</a>
+            </div>
+            
+            <div style="margin-top: 30px; padding: 20px; background-color: #f7fafc; border-radius: 8px;">
+                <h3 style="margin: 0 0 10px 0; color: #2d3748;">Getting Started:</h3>
+                <ol style="margin: 0; padding-left: 20px; color: #718096;">
+                    <li>Upload your site plans or requirements</li>
+                    <li>Describe your project in natural language</li>
+                    <li>Review AI-generated design proposals</li>
+                    <li>Refine and export to Revit</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Need help? Contact our support team at <a href="mailto:support@archbuilder.ai">support@archbuilder.ai</a></p>
+            <p>© 2025 ArchBuilder.AI. All rights reserved.</p>
+            <p><a href="{{ base_url }}/unsubscribe">Unsubscribe</a> | <a href="{{ base_url }}/privacy">Privacy Policy</a></p>
+        </div>
+    </div>
+</body>
+</html>

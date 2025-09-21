@@ -1,0 +1,65 @@
+{
+  "north_america": {
+    "privacy_level": 0.4,
+    "family_structure": "nuclear",
+    "entertainment_style": "casual",
+    "outdoor_connection": "medium",
+    "religious_considerations": [],
+    "dining_traditions": "western",
+    "work_from_home": true,
+    "multi_generational_living": false
+  },
+  "europe": {
+    "privacy_level": 0.6,
+    "family_structure": "nuclear",
+    "entertainment_style": "formal",
+    "outdoor_connection": "high",
+    "religious_considerations": [],
+    "dining_traditions": "western",
+    "work_from_home": true,
+    "multi_generational_living": false
+  },
+  "asia_pacific": {
+    "privacy_level": 0.7,
+    "family_structure": "extended",
+    "entertainment_style": "formal",
+    "outdoor_connection": "medium",
+    "religious_considerations": [],
+    "dining_traditions": "eastern",
+    "work_from_home": true,
+    "multi_generational_living": true
+  },
+  "middle_east": {
+    "privacy_level": 0.8,
+    "family_structure": "extended",
+    "entertainment_style": "formal",
+    "outdoor_connection": "low",
+    "religious_considerations": [
+      "prayer_space",
+      "gender_separation"
+    ],
+    "dining_traditions": "traditional",
+    "work_from_home": true,
+    "multi_generational_living": true
+  },
+  "africa": {
+    "privacy_level": 0.5,
+    "family_structure": "extended",
+    "entertainment_style": "mixed",
+    "outdoor_connection": "high",
+    "religious_considerations": [],
+    "dining_traditions": "traditional",
+    "work_from_home": true,
+    "multi_generational_living": true
+  },
+  "south_america": {
+    "privacy_level": 0.4,
+    "family_structure": "extended",
+    "entertainment_style": "casual",
+    "outdoor_connection": "high",
+    "religious_considerations": [],
+    "dining_traditions": "western",
+    "work_from_home": true,
+    "multi_generational_living": false
+  }
+}

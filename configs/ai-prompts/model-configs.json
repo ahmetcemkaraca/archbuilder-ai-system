@@ -1,0 +1,75 @@
+{
+  "ai_models": {
+    "gemini": {
+      "model_name": "gemini-2.5-flash",
+      "max_tokens": 8192,
+      "temperature": 0.7,
+      "prompt_style": "structured",
+      "supports_multimodal": true,
+      "regional_optimizations": {
+        "north_america": {
+          "cultural_context_weight": 0.3,
+          "regulation_emphasis": 0.8
+        },
+        "europe": {
+          "cultural_context_weight": 0.4,
+          "regulation_emphasis": 0.9
+        },
+        "middle_east": {
+          "cultural_context_weight": 0.6,
+          "regulation_emphasis": 0.7
+        }
+      }
+    },
+    "gpt4": {
+      "model_name": "gpt-4.1-preview",
+      "max_tokens": 4096,
+      "temperature": 0.6,
+      "prompt_style": "conversational",
+      "supports_multimodal": false,
+      "regional_optimizations": {
+        "north_america": {
+          "cultural_context_weight": 0.2,
+          "regulation_emphasis": 0.9
+        },
+        "europe": {
+          "cultural_context_weight": 0.3,
+          "regulation_emphasis": 0.8
+        },
+        "middle_east": {
+          "cultural_context_weight": 0.5,
+          "regulation_emphasis": 0.8
+        }
+      }
+    }
+  },
+  "prompt_templates": {
+    "layout_generation": {
+      "base_template": "layout_generation_base.j2",
+      "cultural_context": "cultural_context_insert.j2",
+      "regional_codes": "regional_codes_insert.j2",
+      "measurement_context": "measurement_context_insert.j2"
+    },
+    "room_optimization": {
+      "base_template": "room_optimization_base.j2", 
+      "cultural_context": "cultural_room_preferences.j2",
+      "accessibility": "accessibility_requirements.j2"
+    },
+    "compliance_validation": {
+      "base_template": "compliance_validation_base.j2",
+      "regional_specific": "regional_compliance_rules.j2"
+    }
+  },
+  "localization": {
+    "supported_languages": ["en", "tr", "de", "fr", "es", "ja"],
+    "fallback_language": "en",
+    "translation_files": {
+      "en": "en/translations.json",
+      "tr": "tr/translations.json", 
+      "de": "de/translations.json",
+      "fr": "fr/translations.json",
+      "es": "es/translations.json",
+      "ja": "ja/translations.json"
+    }
+  }
+}

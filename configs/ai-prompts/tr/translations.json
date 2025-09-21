@@ -1,0 +1,43 @@
+{
+  "prompts": {
+    "layout_generation": {
+      "system_message": "{region} {building_type} binalarında uzmanlaşmış deneyimli bir mimari tasarımcısısınız.",
+      "task_description": "Aşağıdaki gereksinimlere göre optimize edilmiş bir oda düzeni oluşturun:",
+      "input_specification": "Bina Türü: {building_type}\nToplam Alan: {total_area}\nKat Sayısı: {floor_count}\nOda Gereksinimleri: {room_requirements}",
+      "cultural_context": "Aşağıdaki kültürel tercihleri göz önünde bulundurun:\n- Mahremiyet Seviyesi: {privacy_level}\n- Aile Yapısı: {family_structure}\n- Eğlence Tarzı: {entertainment_style}\n- Dini Değerlendirmeler: {religious_considerations}",
+      "compliance_requirements": "Aşağıdaklarla uyumluluğu sağlayın:\n- Yapı Yönetmelikleri: {building_codes}\n- Erişilebilirlik Standartları: {accessibility_standard}\n- Minimum Oda Boyutları: {minimum_room_sizes}",
+      "output_format": "Düzeni oda koordinatları, boyutları ve bağlantıları içeren yapılandırılmış JSON yanıtı olarak sağlayın."
+    },
+    "room_optimization": {
+      "system_message": "{region} mimari standartları için oda düzenlerini optimize etmeye odaklanan bir mekân planlama uzmanısınız.",
+      "optimization_goals": "Şunlar için optimize edin:\n- İşlevsellik ve akış\n- Doğal ışık dağılımı\n- Mahremiyet gereksinimleri\n- Kültürel tercihler\n- Yapı yönetmeliği uyumluluğu",
+      "constraints": "Bu kısıtlamaları göz önünde bulundurun:\n- Toplam kullanılabilir alan: {total_area}\n- Yapısal sınırlamalar: {structural_constraints}\n- Erişilebilirlik gereksinimleri: {accessibility_requirements}"
+    },
+    "compliance_validation": {
+      "system_message": "{region} düzenlemeleri için yapı yönetmeliği uyumluluk uzmanısınız.",
+      "validation_categories": "Aşağıdaki yönleri doğrulayın:\n- Oda boyutları ve oranları\n- Erişilebilirlik uyumluluğu\n- Yangın güvenliği gereksinimleri\n- Yapısal güvenlik\n- Enerji verimliliği standartları",
+      "output_requirements": "Her kategori için geçti/kaldı durumu ve herhangi bir ihlal için özel öneriler içeren ayrıntılı uyumluluk raporu sağlayın."
+    }
+  },
+  "ui_messages": {
+    "progress": {
+      "initializing": "Yerelleştirme hizmeti başlatılıyor...",
+      "loading_preferences": "Kültürel tercihler yükleniyor...",
+      "validating_codes": "Yapı yönetmelikleri doğrulanıyor...",
+      "generating_layout": "Optimize edilmiş düzen oluşturuluyor...",
+      "applying_cultural_context": "Kültürel bağlam uygulanıyor...",
+      "finalizing": "Tasarım önerileri sonuçlandırılıyor..."
+    },
+    "errors": {
+      "locale_not_supported": "İstenen yerel ayar desteklenmiyor. Varsayılan yerel ayar kullanılıyor.",
+      "cultural_data_missing": "Bu bölge için kültürel tercih verileri eksik.",
+      "building_codes_unavailable": "Bu bölge için yapı yönetmelikleri mevcut değil.",
+      "measurement_conversion_failed": "Ölçümlerin istenen sisteme dönüştürülmesi başarısız oldu."
+    },
+    "warnings": {
+      "approximate_conversion": "Ölçüm dönüştürme yaklaşıktır. Lütfen yerel standartlarla doğrulayın.",
+      "cultural_approximation": "Kültürel tercihler genelleştirilmiştir. Yerel varyasyonları göz önünde bulundurun.",
+      "code_interpretation": "Yapı yönetmeliği yorumu yargı yetkisine göre değişebilir. Yerel otoritelerle görüşün."
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "supported_regions": [
+    "north_america",
+    "europe",
+    "asia_pacific",
+    "middle_east",
+    "africa",
+    "south_america"
+  ],
+  "supported_languages": [
+    "en",
+    "tr",
+    "de",
+    "fr",
+    "es",
+    "ja",
+    "ar",
+    "pt",
+    "it",
+    "ru"
+  ],
+  "default_measurement_systems": {
+    "north_america": "imperial",
+    "europe": "metric",
+    "asia_pacific": "metric",
+    "middle_east": "metric",
+    "africa": "metric",
+    "south_america": "metric"
+  }
+}

@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyTitle>ArchBuilder.AI Shared Libraries</AssemblyTitle>
+    <AssemblyDescription>Shared libraries and utilities for ArchBuilder.AI</AssemblyDescription>
+    <AssemblyCompany>ArchBuilder.AI</AssemblyCompany>
+    <AssemblyProduct>ArchBuilder.Shared</AssemblyProduct>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="8.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <PackageReference Include="System.ComponentModel.DataAnnotations" Version="5.0.0" />
+    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="FileFormats\DWG\" />
+    <Folder Include="FileFormats\DXF\" />
+    <Folder Include="FileFormats\IFC\" />
+    <Folder Include="FileFormats\PDF\" />
+    <Folder Include="ProjectAnalysis\BIM\" />
+    <Folder Include="ProjectAnalysis\Performance\" />
+    <Folder Include="ProjectAnalysis\Compliance\" />
+    <Folder Include="DataContracts\AI\" />
+    <Folder Include="DataContracts\Projects\" />
+    <Folder Include="DataContracts\Documents\" />
+    <Folder Include="Security\Encryption\" />
+    <Folder Include="Security\Authentication\" />
+    <Folder Include="Security\Validation\" />
+  </ItemGroup>
+
+</Project>

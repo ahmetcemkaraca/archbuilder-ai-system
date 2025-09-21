@@ -1,0 +1,17 @@
+{
+  "app_name": "ArchBuilder.AI",
+  "welcome": "Willkommen bei ArchBuilder.AI",
+  "generate_layout": "Layout Generieren",
+  "building_type": "Gebäudetyp",
+  "total_area": "Gesamtfläche",
+  "room_requirements": "Raumanforderungen",
+  "cultural_preferences": "Kulturelle Präferenzen",
+  "generate": "Generieren",
+  "cancel": "Abbrechen",
+  "success": "Erfolg",
+  "error": "Fehler",
+  "loading": "Wird geladen...",
+  "residential": "Wohngebäude",
+  "commercial": "Gewerbegebäude",
+  "mixed_use": "Mischnutzung"
+}

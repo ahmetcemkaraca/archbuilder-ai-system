@@ -1,0 +1,86 @@
+{
+  "regions": {
+    "north_america": {
+      "countries": ["US", "CA", "MX"],
+      "default_locale": "en-US",
+      "measurement_system": "imperial",
+      "timezone": "America/New_York",
+      "currency": "USD",
+      "business_hours": {
+        "start": "09:00",
+        "end": "17:00",
+        "timezone": "local"
+      }
+    },
+    "europe": {
+      "countries": ["DE", "FR", "IT", "ES", "NL", "UK", "NO", "SE", "DK"],
+      "default_locale": "en-GB",
+      "measurement_system": "metric",
+      "timezone": "Europe/London",
+      "currency": "EUR",
+      "business_hours": {
+        "start": "09:00",
+        "end": "17:00",
+        "timezone": "local"
+      }
+    },
+    "asia_pacific": {
+      "countries": ["JP", "KR", "CN", "SG", "AU", "NZ", "IN"],
+      "default_locale": "en-US",
+      "measurement_system": "metric",
+      "timezone": "Asia/Tokyo",
+      "currency": "USD",
+      "business_hours": {
+        "start": "09:00",
+        "end": "17:00",
+        "timezone": "local"
+      }
+    },
+    "middle_east": {
+      "countries": ["TR", "SA", "AE", "IL", "EG", "JO", "LB"],
+      "default_locale": "en-US",
+      "measurement_system": "metric",
+      "timezone": "Asia/Istanbul",
+      "currency": "USD",
+      "business_hours": {
+        "start": "08:00",
+        "end": "16:00",
+        "timezone": "local"
+      }
+    },
+    "africa": {
+      "countries": ["ZA", "NG", "EG", "KE", "MA", "GH"],
+      "default_locale": "en-US",
+      "measurement_system": "metric",
+      "timezone": "Africa/Johannesburg",
+      "currency": "USD",
+      "business_hours": {
+        "start": "08:00",
+        "end": "17:00",
+        "timezone": "local"
+      }
+    },
+    "south_america": {
+      "countries": ["BR", "AR", "CL", "CO", "PE", "VE"],
+      "default_locale": "es-ES",
+      "measurement_system": "metric",
+      "timezone": "America/Sao_Paulo",
+      "currency": "USD",
+      "business_hours": {
+        "start": "09:00",
+        "end": "18:00",
+        "timezone": "local"
+      }
+    }
+  },
+  "supported_locales": [
+    "en-US", "en-GB", "tr-TR", "de-DE", "fr-FR", 
+    "es-ES", "it-IT", "ja-JP", "ko-KR", "ar-SA"
+  ],
+  "fallback_locale": "en-US",
+  "measurement_conversion": {
+    "enabled": true,
+    "auto_detect": true,
+    "user_preference_override": true
+  }
+}

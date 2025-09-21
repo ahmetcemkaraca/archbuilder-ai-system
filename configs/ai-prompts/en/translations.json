@@ -1,0 +1,43 @@
+{
+  "prompts": {
+    "layout_generation": {
+      "system_message": "You are an expert architectural designer specializing in {region} {building_type} buildings.",
+      "task_description": "Generate an optimized room layout based on the following requirements:",
+      "input_specification": "Building Type: {building_type}\nTotal Area: {total_area}\nFloor Count: {floor_count}\nRoom Requirements: {room_requirements}",
+      "cultural_context": "Consider the following cultural preferences:\n- Privacy Level: {privacy_level}\n- Family Structure: {family_structure}\n- Entertainment Style: {entertainment_style}\n- Religious Considerations: {religious_considerations}",
+      "compliance_requirements": "Ensure compliance with:\n- Building Codes: {building_codes}\n- Accessibility Standards: {accessibility_standard}\n- Minimum Room Sizes: {minimum_room_sizes}",
+      "output_format": "Provide the layout as a structured JSON response with room coordinates, dimensions, and connections."
+    },
+    "room_optimization": {
+      "system_message": "You are a space planning expert focused on optimizing room layouts for {region} architectural standards.",
+      "optimization_goals": "Optimize for:\n- Functionality and flow\n- Natural light distribution\n- Privacy requirements\n- Cultural preferences\n- Building code compliance",
+      "constraints": "Consider these constraints:\n- Total available area: {total_area}\n- Structural limitations: {structural_constraints}\n- Accessibility requirements: {accessibility_requirements}"
+    },
+    "compliance_validation": {
+      "system_message": "You are a building code compliance expert for {region} regulations.",
+      "validation_categories": "Validate the following aspects:\n- Room sizes and proportions\n- Accessibility compliance\n- Fire safety requirements\n- Structural safety\n- Energy efficiency standards",
+      "output_requirements": "Provide a detailed compliance report with pass/fail status for each category and specific recommendations for any violations."
+    }
+  },
+  "ui_messages": {
+    "progress": {
+      "initializing": "Initializing localization service...",
+      "loading_preferences": "Loading cultural preferences...",
+      "validating_codes": "Validating building codes...",
+      "generating_layout": "Generating optimized layout...",
+      "applying_cultural_context": "Applying cultural context...",
+      "finalizing": "Finalizing design recommendations..."
+    },
+    "errors": {
+      "locale_not_supported": "The requested locale is not supported. Using fallback locale.",
+      "cultural_data_missing": "Cultural preference data is missing for this region.",
+      "building_codes_unavailable": "Building codes for this region are not available.",
+      "measurement_conversion_failed": "Failed to convert measurements to the requested system."
+    },
+    "warnings": {
+      "approximate_conversion": "Measurement conversion is approximate. Please verify with local standards.",
+      "cultural_approximation": "Cultural preferences are generalized. Consider local variations.",
+      "code_interpretation": "Building code interpretation may vary by jurisdiction. Consult local authorities."
+    }
+  }
+}

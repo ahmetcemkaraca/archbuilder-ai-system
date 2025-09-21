@@ -1,0 +1,201 @@
+{
+  "north_america": {
+    "primary_codes": [
+      "IBC",
+      "IRC",
+      "Local Zoning"
+    ],
+    "secondary_codes": [],
+    "accessibility_standard": "ADA",
+    "energy_standard": "IECC",
+    "seismic_requirements": true,
+    "climate_adaptations": [
+      "hurricane",
+      "tornado",
+      "wildfire"
+    ],
+    "max_occupancy_ratios": {
+      "residential": 0.5,
+      "commercial": 0.7
+    },
+    "minimum_room_sizes": {
+      "bedroom": 6.5,
+      "living_room": 13.9,
+      "kitchen": 7.4
+    },
+    "setback_requirements": {
+      "front": 7.6,
+      "side": 3.0,
+      "rear": 7.6
+    },
+    "height_restrictions": {
+      "residential": 10.7,
+      "commercial": 30.5
+    }
+  },
+  "europe": {
+    "primary_codes": [
+      "Eurocode",
+      "National Building Regulations"
+    ],
+    "secondary_codes": [],
+    "accessibility_standard": "European Accessibility Act",
+    "energy_standard": "EU Energy Performance Directive",
+    "seismic_requirements": true,
+    "climate_adaptations": [
+      "flood",
+      "heat_wave",
+      "snow_load"
+    ],
+    "max_occupancy_ratios": {
+      "residential": 0.4,
+      "commercial": 0.6
+    },
+    "minimum_room_sizes": {
+      "bedroom": 9.0,
+      "living_room": 16.0,
+      "kitchen": 6.0
+    },
+    "setback_requirements": {
+      "front": 5.0,
+      "side": 3.0,
+      "rear": 5.0
+    },
+    "height_restrictions": {
+      "residential": 12.0,
+      "commercial": 50.0
+    }
+  },
+  "middle_east": {
+    "primary_codes": [
+      "National Building Code",
+      "Municipal Regulations"
+    ],
+    "secondary_codes": [],
+    "accessibility_standard": "International Accessibility Standards",
+    "energy_standard": "Regional Energy Code",
+    "seismic_requirements": true,
+    "climate_adaptations": [
+      "extreme_heat",
+      "dust_storms",
+      "earthquake"
+    ],
+    "max_occupancy_ratios": {
+      "residential": 0.4,
+      "commercial": 0.6
+    },
+    "minimum_room_sizes": {
+      "bedroom": 9.0,
+      "living_room": 12.0,
+      "kitchen": 6.0
+    },
+    "setback_requirements": {
+      "front": 6.0,
+      "side": 3.0,
+      "rear": 6.0
+    },
+    "height_restrictions": {
+      "residential": 15.0,
+      "commercial": 100.0
+    }
+  },
+  "asia_pacific": {
+    "primary_codes": [
+      "National Building Code",
+      "Local Regulations"
+    ],
+    "secondary_codes": [],
+    "accessibility_standard": "Regional Accessibility Standards",
+    "energy_standard": "National Energy Code",
+    "seismic_requirements": true,
+    "climate_adaptations": [
+      "typhoon",
+      "earthquake",
+      "humidity",
+      "flood"
+    ],
+    "max_occupancy_ratios": {
+      "residential": 0.6,
+      "commercial": 0.8
+    },
+    "minimum_room_sizes": {
+      "bedroom": 8.0,
+      "living_room": 14.0,
+      "kitchen": 5.0
+    },
+    "setback_requirements": {
+      "front": 4.0,
+      "side": 2.0,
+      "rear": 4.0
+    },
+    "height_restrictions": {
+      "residential": 20.0,
+      "commercial": 200.0
+    }
+  },
+  "africa": {
+    "primary_codes": [
+      "National Building Code"
+    ],
+    "secondary_codes": [],
+    "accessibility_standard": "International Standards",
+    "energy_standard": "Basic Energy Requirements",
+    "seismic_requirements": false,
+    "climate_adaptations": [
+      "extreme_heat",
+      "drought",
+      "flood"
+    ],
+    "max_occupancy_ratios": {
+      "residential": 0.5,
+      "commercial": 0.7
+    },
+    "minimum_room_sizes": {
+      "bedroom": 7.0,
+      "living_room": 12.0,
+      "kitchen": 5.0
+    },
+    "setback_requirements": {
+      "front": 5.0,
+      "side": 2.5,
+      "rear": 5.0
+    },
+    "height_restrictions": {
+      "residential": 15.0,
+      "commercial": 50.0
+    }
+  },
+  "south_america": {
+    "primary_codes": [
+      "National Building Code",
+      "Regional Standards"
+    ],
+    "secondary_codes": [],
+    "accessibility_standard": "Regional Accessibility Requirements",
+    "energy_standard": "Energy Efficiency Standards",
+    "seismic_requirements": true,
+    "climate_adaptations": [
+      "earthquake",
+      "flood",
+      "hurricane"
+    ],
+    "max_occupancy_ratios": {
+      "residential": 0.5,
+      "commercial": 0.7
+    },
+    "minimum_room_sizes": {
+      "bedroom": 8.0,
+      "living_room": 15.0,
+      "kitchen": 6.0
+    },
+    "setback_requirements": {
+      "front": 6.0,
+      "side": 3.0,
+      "rear": 6.0
+    },
+    "height_restrictions": {
+      "residential": 12.0,
+      "commercial": 80.0
+    }
+  }
+}

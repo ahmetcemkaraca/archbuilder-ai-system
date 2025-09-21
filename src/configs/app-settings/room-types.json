@@ -1,0 +1,668 @@
+{
+  "north_america": {
+    "bedroom": {
+      "standard_type": "bedroom",
+      "localized_names": {
+        "en": "Bedroom",
+        "tr": "Yatak Odası",
+        "de": "Schlafzimmer",
+        "fr": "Chambre",
+        "es": "Dormitorio",
+        "ja": "寝室",
+        "ar": "غرفة النوم"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          9.0,
+          25.0
+        ],
+        "max": [
+          9.0,
+          25.0
+        ]
+      },
+      "cultural_requirements": [
+        "privacy",
+        "natural_light"
+      ]
+    },
+    "living_room": {
+      "standard_type": "living_room",
+      "localized_names": {
+        "en": "Living Room",
+        "tr": "Oturma Odası",
+        "de": "Wohnzimmer",
+        "fr": "Salon",
+        "es": "Sala de Estar",
+        "ja": "居間",
+        "ar": "غرفة المعيشة"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          12.0,
+          50.0
+        ],
+        "max": [
+          12.0,
+          50.0
+        ]
+      },
+      "cultural_requirements": [
+        "family_gathering",
+        "entertainment"
+      ]
+    },
+    "kitchen": {
+      "standard_type": "kitchen",
+      "localized_names": {
+        "en": "Kitchen",
+        "tr": "Mutfak",
+        "de": "Küche",
+        "fr": "Cuisine",
+        "es": "Cocina",
+        "ja": "台所",
+        "ar": "مطبخ"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          6.0,
+          20.0
+        ],
+        "max": [
+          6.0,
+          20.0
+        ]
+      },
+      "cultural_requirements": [
+        "ventilation",
+        "water_access"
+      ]
+    },
+    "bathroom": {
+      "standard_type": "bathroom",
+      "localized_names": {
+        "en": "Bathroom",
+        "tr": "Banyo",
+        "de": "Badezimmer",
+        "fr": "Salle de bain",
+        "es": "Baño",
+        "ja": "浴室",
+        "ar": "حمام"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          3.0,
+          15.0
+        ],
+        "max": [
+          3.0,
+          15.0
+        ]
+      },
+      "cultural_requirements": [
+        "privacy",
+        "ventilation",
+        "water_access"
+      ]
+    }
+  },
+  "europe": {
+    "bedroom": {
+      "standard_type": "bedroom",
+      "localized_names": {
+        "en": "Bedroom",
+        "tr": "Yatak Odası",
+        "de": "Schlafzimmer",
+        "fr": "Chambre",
+        "es": "Dormitorio",
+        "ja": "寝室",
+        "ar": "غرفة النوم"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          9.0,
+          25.0
+        ],
+        "max": [
+          9.0,
+          25.0
+        ]
+      },
+      "cultural_requirements": [
+        "privacy",
+        "natural_light"
+      ]
+    },
+    "living_room": {
+      "standard_type": "living_room",
+      "localized_names": {
+        "en": "Living Room",
+        "tr": "Oturma Odası",
+        "de": "Wohnzimmer",
+        "fr": "Salon",
+        "es": "Sala de Estar",
+        "ja": "居間",
+        "ar": "غرفة المعيشة"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          12.0,
+          50.0
+        ],
+        "max": [
+          12.0,
+          50.0
+        ]
+      },
+      "cultural_requirements": [
+        "family_gathering",
+        "entertainment"
+      ]
+    },
+    "kitchen": {
+      "standard_type": "kitchen",
+      "localized_names": {
+        "en": "Kitchen",
+        "tr": "Mutfak",
+        "de": "Küche",
+        "fr": "Cuisine",
+        "es": "Cocina",
+        "ja": "台所",
+        "ar": "مطبخ"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          6.0,
+          20.0
+        ],
+        "max": [
+          6.0,
+          20.0
+        ]
+      },
+      "cultural_requirements": [
+        "ventilation",
+        "water_access"
+      ]
+    },
+    "bathroom": {
+      "standard_type": "bathroom",
+      "localized_names": {
+        "en": "Bathroom",
+        "tr": "Banyo",
+        "de": "Badezimmer",
+        "fr": "Salle de bain",
+        "es": "Baño",
+        "ja": "浴室",
+        "ar": "حمام"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          3.0,
+          15.0
+        ],
+        "max": [
+          3.0,
+          15.0
+        ]
+      },
+      "cultural_requirements": [
+        "privacy",
+        "ventilation",
+        "water_access"
+      ]
+    }
+  },
+  "asia_pacific": {
+    "bedroom": {
+      "standard_type": "bedroom",
+      "localized_names": {
+        "en": "Bedroom",
+        "tr": "Yatak Odası",
+        "de": "Schlafzimmer",
+        "fr": "Chambre",
+        "es": "Dormitorio",
+        "ja": "寝室",
+        "ar": "غرفة النوم"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          9.0,
+          25.0
+        ],
+        "max": [
+          9.0,
+          25.0
+        ]
+      },
+      "cultural_requirements": [
+        "privacy",
+        "natural_light"
+      ]
+    },
+    "living_room": {
+      "standard_type": "living_room",
+      "localized_names": {
+        "en": "Living Room",
+        "tr": "Oturma Odası",
+        "de": "Wohnzimmer",
+        "fr": "Salon",
+        "es": "Sala de Estar",
+        "ja": "居間",
+        "ar": "غرفة المعيشة"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          12.0,
+          50.0
+        ],
+        "max": [
+          12.0,
+          50.0
+        ]
+      },
+      "cultural_requirements": [
+        "family_gathering",
+        "entertainment"
+      ]
+    },
+    "kitchen": {
+      "standard_type": "kitchen",
+      "localized_names": {
+        "en": "Kitchen",
+        "tr": "Mutfak",
+        "de": "Küche",
+        "fr": "Cuisine",
+        "es": "Cocina",
+        "ja": "台所",
+        "ar": "مطبخ"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          6.0,
+          20.0
+        ],
+        "max": [
+          6.0,
+          20.0
+        ]
+      },
+      "cultural_requirements": [
+        "ventilation",
+        "water_access"
+      ]
+    },
+    "bathroom": {
+      "standard_type": "bathroom",
+      "localized_names": {
+        "en": "Bathroom",
+        "tr": "Banyo",
+        "de": "Badezimmer",
+        "fr": "Salle de bain",
+        "es": "Baño",
+        "ja": "浴室",
+        "ar": "حمام"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          3.0,
+          15.0
+        ],
+        "max": [
+          3.0,
+          15.0
+        ]
+      },
+      "cultural_requirements": [
+        "privacy",
+        "ventilation",
+        "water_access"
+      ]
+    }
+  },
+  "middle_east": {
+    "bedroom": {
+      "standard_type": "bedroom",
+      "localized_names": {
+        "en": "Bedroom",
+        "tr": "Yatak Odası",
+        "de": "Schlafzimmer",
+        "fr": "Chambre",
+        "es": "Dormitorio",
+        "ja": "寝室",
+        "ar": "غرفة النوم"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          9.0,
+          25.0
+        ],
+        "max": [
+          9.0,
+          25.0
+        ]
+      },
+      "cultural_requirements": [
+        "privacy",
+        "natural_light"
+      ]
+    },
+    "living_room": {
+      "standard_type": "living_room",
+      "localized_names": {
+        "en": "Living Room",
+        "tr": "Oturma Odası",
+        "de": "Wohnzimmer",
+        "fr": "Salon",
+        "es": "Sala de Estar",
+        "ja": "居間",
+        "ar": "غرفة المعيشة"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          12.0,
+          50.0
+        ],
+        "max": [
+          12.0,
+          50.0
+        ]
+      },
+      "cultural_requirements": [
+        "family_gathering",
+        "entertainment"
+      ]
+    },
+    "kitchen": {
+      "standard_type": "kitchen",
+      "localized_names": {
+        "en": "Kitchen",
+        "tr": "Mutfak",
+        "de": "Küche",
+        "fr": "Cuisine",
+        "es": "Cocina",
+        "ja": "台所",
+        "ar": "مطبخ"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          6.0,
+          20.0
+        ],
+        "max": [
+          6.0,
+          20.0
+        ]
+      },
+      "cultural_requirements": [
+        "ventilation",
+        "water_access"
+      ]
+    },
+    "bathroom": {
+      "standard_type": "bathroom",
+      "localized_names": {
+        "en": "Bathroom",
+        "tr": "Banyo",
+        "de": "Badezimmer",
+        "fr": "Salle de bain",
+        "es": "Baño",
+        "ja": "浴室",
+        "ar": "حمام"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          3.0,
+          15.0
+        ],
+        "max": [
+          3.0,
+          15.0
+        ]
+      },
+      "cultural_requirements": [
+        "privacy",
+        "ventilation",
+        "water_access"
+      ]
+    }
+  },
+  "africa": {
+    "bedroom": {
+      "standard_type": "bedroom",
+      "localized_names": {
+        "en": "Bedroom",
+        "tr": "Yatak Odası",
+        "de": "Schlafzimmer",
+        "fr": "Chambre",
+        "es": "Dormitorio",
+        "ja": "寝室",
+        "ar": "غرفة النوم"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          9.0,
+          25.0
+        ],
+        "max": [
+          9.0,
+          25.0
+        ]
+      },
+      "cultural_requirements": [
+        "privacy",
+        "natural_light"
+      ]
+    },
+    "living_room": {
+      "standard_type": "living_room",
+      "localized_names": {
+        "en": "Living Room",
+        "tr": "Oturma Odası",
+        "de": "Wohnzimmer",
+        "fr": "Salon",
+        "es": "Sala de Estar",
+        "ja": "居間",
+        "ar": "غرفة المعيشة"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          12.0,
+          50.0
+        ],
+        "max": [
+          12.0,
+          50.0
+        ]
+      },
+      "cultural_requirements": [
+        "family_gathering",
+        "entertainment"
+      ]
+    },
+    "kitchen": {
+      "standard_type": "kitchen",
+      "localized_names": {
+        "en": "Kitchen",
+        "tr": "Mutfak",
+        "de": "Küche",
+        "fr": "Cuisine",
+        "es": "Cocina",
+        "ja": "台所",
+        "ar": "مطبخ"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          6.0,
+          20.0
+        ],
+        "max": [
+          6.0,
+          20.0
+        ]
+      },
+      "cultural_requirements": [
+        "ventilation",
+        "water_access"
+      ]
+    },
+    "bathroom": {
+      "standard_type": "bathroom",
+      "localized_names": {
+        "en": "Bathroom",
+        "tr": "Banyo",
+        "de": "Badezimmer",
+        "fr": "Salle de bain",
+        "es": "Baño",
+        "ja": "浴室",
+        "ar": "حمام"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          3.0,
+          15.0
+        ],
+        "max": [
+          3.0,
+          15.0
+        ]
+      },
+      "cultural_requirements": [
+        "privacy",
+        "ventilation",
+        "water_access"
+      ]
+    }
+  },
+  "south_america": {
+    "bedroom": {
+      "standard_type": "bedroom",
+      "localized_names": {
+        "en": "Bedroom",
+        "tr": "Yatak Odası",
+        "de": "Schlafzimmer",
+        "fr": "Chambre",
+        "es": "Dormitorio",
+        "ja": "寝室",
+        "ar": "غرفة النوم"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          9.0,
+          25.0
+        ],
+        "max": [
+          9.0,
+          25.0
+        ]
+      },
+      "cultural_requirements": [
+        "privacy",
+        "natural_light"
+      ]
+    },
+    "living_room": {
+      "standard_type": "living_room",
+      "localized_names": {
+        "en": "Living Room",
+        "tr": "Oturma Odası",
+        "de": "Wohnzimmer",
+        "fr": "Salon",
+        "es": "Sala de Estar",
+        "ja": "居間",
+        "ar": "غرفة المعيشة"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          12.0,
+          50.0
+        ],
+        "max": [
+          12.0,
+          50.0
+        ]
+      },
+      "cultural_requirements": [
+        "family_gathering",
+        "entertainment"
+      ]
+    },
+    "kitchen": {
+      "standard_type": "kitchen",
+      "localized_names": {
+        "en": "Kitchen",
+        "tr": "Mutfak",
+        "de": "Küche",
+        "fr": "Cuisine",
+        "es": "Cocina",
+        "ja": "台所",
+        "ar": "مطبخ"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          6.0,
+          20.0
+        ],
+        "max": [
+          6.0,
+          20.0
+        ]
+      },
+      "cultural_requirements": [
+        "ventilation",
+        "water_access"
+      ]
+    },
+    "bathroom": {
+      "standard_type": "bathroom",
+      "localized_names": {
+        "en": "Bathroom",
+        "tr": "Banyo",
+        "de": "Badezimmer",
+        "fr": "Salle de bain",
+        "es": "Baño",
+        "ja": "浴室",
+        "ar": "حمام"
+      },
+      "cultural_variants": {},
+      "typical_sizes": {
+        "min": [
+          3.0,
+          15.0
+        ],
+        "max": [
+          3.0,
+          15.0
+        ]
+      },
+      "cultural_requirements": [
+        "privacy",
+        "ventilation",
+        "water_access"
+      ]
+    }
+  }
+}

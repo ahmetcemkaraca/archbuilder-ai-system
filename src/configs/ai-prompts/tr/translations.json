@@ -1,0 +1,17 @@
+{
+  "app_name": "ArchBuilder.AI",
+  "welcome": "ArchBuilder.AI'ye Hoş Geldiniz",
+  "generate_layout": "Düzen Oluştur",
+  "building_type": "Bina Türü",
+  "total_area": "Toplam Alan",
+  "room_requirements": "Oda Gereksinimleri",
+  "cultural_preferences": "Kültürel Tercihler",
+  "generate": "Oluştur",
+  "cancel": "İptal",
+  "success": "Başarılı",
+  "error": "Hata",
+  "loading": "Yükleniyor...",
+  "residential": "Konut",
+  "commercial": "Ticari",
+  "mixed_use": "Karma Kullanım"
+}

@@ -1,0 +1,89 @@
+{
+  "cultural_preferences": {
+    "north_america": {
+      "privacy_level": 0.4,
+      "family_structure": "nuclear",
+      "entertainment_style": "open",
+      "dining_traditions": "casual",
+      "religious_considerations": [],
+      "guest_accommodation": "moderate",
+      "outdoor_living": "high",
+      "storage_priorities": ["closets", "garage", "basement"],
+      "technology_integration": "high"
+    },
+    "europe": {
+      "privacy_level": 0.6,
+      "family_structure": "nuclear",
+      "entertainment_style": "formal",
+      "dining_traditions": "formal",
+      "religious_considerations": [],
+      "guest_accommodation": "moderate",
+      "outdoor_living": "moderate",
+      "storage_priorities": ["closets", "cellars", "attics"],
+      "technology_integration": "moderate"
+    },
+    "asia_pacific": {
+      "privacy_level": 0.5,
+      "family_structure": "extended",
+      "entertainment_style": "mixed",
+      "dining_traditions": "family_style",
+      "religious_considerations": ["meditation_space"],
+      "guest_accommodation": "high",
+      "outdoor_living": "high",
+      "storage_priorities": ["built_ins", "shoe_storage", "flexible_storage"],
+      "technology_integration": "very_high"
+    },
+    "middle_east": {
+      "privacy_level": 0.8,
+      "family_structure": "extended",
+      "entertainment_style": "separated",
+      "dining_traditions": "communal",
+      "religious_considerations": ["prayer_space", "gender_separation"],
+      "guest_accommodation": "very_high",
+      "outdoor_living": "moderate",
+      "storage_priorities": ["prayer_rugs", "seasonal_clothing", "traditional_items"],
+      "technology_integration": "moderate"
+    },
+    "africa": {
+      "privacy_level": 0.3,
+      "family_structure": "extended",
+      "entertainment_style": "communal",
+      "dining_traditions": "communal",
+      "religious_considerations": [],
+      "guest_accommodation": "very_high",
+      "outdoor_living": "very_high",
+      "storage_priorities": ["communal_spaces", "outdoor_storage", "multipurpose"],
+      "technology_integration": "moderate"
+    },
+    "south_america": {
+      "privacy_level": 0.4,
+      "family_structure": "extended",
+      "entertainment_style": "festive",
+      "dining_traditions": "family_style",
+      "religious_considerations": [],
+      "guest_accommodation": "high",
+      "outdoor_living": "very_high",
+      "storage_priorities": ["entertaining_supplies", "seasonal_items", "family_collections"],
+      "technology_integration": "moderate"
+    }
+  },
+  "room_sizing_factors": {
+    "privacy_multiplier": {
+      "low": 0.9,
+      "moderate": 1.0,
+      "high": 1.2,
+      "very_high": 1.4
+    },
+    "family_structure_multiplier": {
+      "nuclear": 1.0,
+      "extended": 1.3,
+      "multi_generational": 1.5
+    },
+    "guest_accommodation_multiplier": {
+      "low": 0.9,
+      "moderate": 1.0,
+      "high": 1.2,
+      "very_high": 1.4
+    }
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "regional_building_codes": {
+    "north_america": {
+      "primary_codes": ["IBC", "IRC", "Local Zoning"],
+      "accessibility_standard": "ADA",
+      "energy_codes": ["IECC", "ASHRAE 90.1"],
+      "seismic_requirements": true,
+      "wind_load_requirements": true,
+      "fire_safety_standards": ["NFPA 101", "IBC Chapter 9"],
+      "plumbing_codes": ["IPC", "Local Plumbing Code"],
+      "electrical_codes": ["NEC", "Local Electrical Code"],
+      "minimum_room_sizes": {
+        "bedroom": 70.0,
+        "bathroom": 30.0,
+        "kitchen": 50.0,
+        "living_room": 120.0
+      },
+      "ceiling_heights": {
+        "minimum": 2.4,
+        "standard": 2.7,
+        "preferred": 3.0
+      }
+    },
+    "europe": {
+      "primary_codes": ["Eurocode", "National Building Regulations"],
+      "accessibility_standard": "European Accessibility Act",
+      "energy_codes": ["EPBD", "National Energy Standards"],
+      "seismic_requirements": true,
+      "wind_load_requirements": true,
+      "fire_safety_standards": ["EN 1991-1-2", "National Fire Codes"],
+      "plumbing_codes": ["EN 806", "National Plumbing Standards"],
+      "electrical_codes": ["IEC 60364", "National Electrical Standards"],
+      "minimum_room_sizes": {
+        "bedroom": 9.0,
+        "bathroom": 4.0,
+        "kitchen": 6.0,
+        "living_room": 16.0
+      },
+      "ceiling_heights": {
+        "minimum": 2.3,
+        "standard": 2.5,
+        "preferred": 2.8
+      }
+    },
+    "asia_pacific": {
+      "primary_codes": ["National Building Code", "Regional Standards"],
+      "accessibility_standard": "National Accessibility Standards",
+      "energy_codes": ["National Energy Conservation Code"],
+      "seismic_requirements": true,
+      "wind_load_requirements": true,
+      "fire_safety_standards": ["National Fire Code"],
+      "plumbing_codes": ["National Plumbing Code"],
+      "electrical_codes": ["National Electrical Code"],
+      "minimum_room_sizes": {
+        "bedroom": 8.0,
+        "bathroom": 3.0,
+        "kitchen": 5.0,
+        "living_room": 12.0
+      },
+      "ceiling_heights": {
+        "minimum": 2.2,
+        "standard": 2.4,
+        "preferred": 2.7
+      }
+    },
+    "middle_east": {
+      "primary_codes": ["National Building Code", "Municipal Regulations"],
+      "accessibility_standard": "International Accessibility Standards",
+      "energy_codes": ["National Energy Code"],
+      "seismic_requirements": true,
+      "wind_load_requirements": false,
+      "fire_safety_standards": ["National Fire Safety Code"],
+      "plumbing_codes": ["National Plumbing Standards"],
+      "electrical_codes": ["National Electrical Standards"],
+      "minimum_room_sizes": {
+        "bedroom": 9.0,
+        "bathroom": 4.0,
+        "kitchen": 6.0,
+        "living_room": 15.0
+      },
+      "ceiling_heights": {
+        "minimum": 2.4,
+        "standard": 2.7,
+        "preferred": 3.0
+      }
+    },
+    "africa": {
+      "primary_codes": ["National Building Code", "Regional Standards"],
+      "accessibility_standard": "Regional Accessibility Guidelines",
+      "energy_codes": ["National Energy Guidelines"],
+      "seismic_requirements": false,
+      "wind_load_requirements": true,
+      "fire_safety_standards": ["National Fire Standards"],
+      "plumbing_codes": ["National Plumbing Code"],
+      "electrical_codes": ["National Electrical Standards"],
+      "minimum_room_sizes": {
+        "bedroom": 8.0,
+        "bathroom": 3.0,
+        "kitchen": 5.0,
+        "living_room": 12.0
+      },
+      "ceiling_heights": {
+        "minimum": 2.2,
+        "standard": 2.4,
+        "preferred": 2.7
+      }
+    },
+    "south_america": {
+      "primary_codes": ["National Building Code", "Municipal Codes"],
+      "accessibility_standard": "Regional Accessibility Standards",
+      "energy_codes": ["National Energy Standards"],
+      "seismic_requirements": true,
+      "wind_load_requirements": true,
+      "fire_safety_standards": ["National Fire Code"],
+      "plumbing_codes": ["National Plumbing Standards"],
+      "electrical_codes": ["National Electrical Code"],
+      "minimum_room_sizes": {
+        "bedroom": 9.0,
+        "bathroom": 4.0,
+        "kitchen": 6.0,
+        "living_room": 14.0
+      },
+      "ceiling_heights": {
+        "minimum": 2.3,
+        "standard": 2.5,
+        "preferred": 2.8
+      }
+    }
+  },
+  "compliance_validation": {
+    "enabled": true,
+    "strict_mode": false,
+    "auto_adjust": true,
+    "warning_threshold": 0.1,
+    "validation_categories": [
+      "room_sizes",
+      "ceiling_heights", 
+      "accessibility",
+      "fire_safety",
+      "structural_requirements"
+    ]
+  }
+}

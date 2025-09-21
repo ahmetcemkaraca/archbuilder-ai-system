@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>ArchBuilder.AI</Name>
+    <Assembly>ArchBuilderRevit.dll</Assembly>
+    <AddInId>8B5F6F7E-8C4D-4A3E-9B2A-1F5E8D7C6B9A</AddInId>
+    <FullClassName>ArchBuilderRevit.Program</FullClassName>
+    <VendorId>ARCHB</VendorId>
+    <VendorDescription>ArchBuilder.AI</VendorDescription>
+    <Text>ArchBuilder.AI - AI-Powered Architectural Design Automation</Text>
+    <Description>Transform natural language into architectural designs with AI-powered automation.</Description>
+    <VisibilityMode>AlwaysVisible</VisibilityMode>
+  </AddIn>
+</RevitAddIns>

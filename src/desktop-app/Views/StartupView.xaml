@@ -1,0 +1,77 @@
+<UserControl x:Class="ArchBuilder.Views.StartupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ArchBuilder.Views"
+             xmlns:viewmodels="clr-namespace:ArchBuilder.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <!-- Ortak stiller ve şablonlar buraya eklenebilir -->
+    </UserControl.Resources>
+
+    <Grid Background="{DynamicResource WindowBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sol Panel: Giriş/Kayıt Formu -->
+        <Border Grid.Column="0" Background="{DynamicResource PrimaryBrush}" CornerRadius="0,0,10,10" Padding="30">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
+                <TextBlock Text="ArchBuilder.AI" Style="{DynamicResource TitleTextStyle}" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+
+                <!-- Giriş Formu -->
+                <StackPanel Visibility="{Binding IsLoginViewVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock Text="Giriş Yap" Style="{DynamicResource SubtitleTextStyle}" Margin="0,0,0,15"/>
+
+                    <TextBlock Text="E-posta:" Style="{DynamicResource LabelTextStyle}"/>
+                    <TextBox Text="{Binding LoginEmail, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ModernTextBox}" Margin="0,5,0,15"/>
+
+                    <TextBlock Text="Parola:" Style="{DynamicResource LabelTextStyle}"/>
+                    <PasswordBox x:Name="LoginPasswordBox" Style="{DynamicResource ModernPasswordBox}" Margin="0,5,0,15"/>
+
+                    <Button Content="Giriş Yap" Command="{Binding LoginCommand}" Style="{DynamicResource PrimaryButton}" Margin="0,10,0,10"/>
+                    <TextBlock Text="Hesabınız yok mu?" HorizontalAlignment="Center" Margin="0,10,0,0" Style="{DynamicResource LinkTextStyle}">
+                        <Hyperlink Command="{Binding ShowRegisterViewCommand}">Kaydol</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+
+                <!-- Kayıt Formu -->
+                <StackPanel Visibility="{Binding IsRegisterViewVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock Text="Kaydol" Style="{DynamicResource SubtitleTextStyle}" Margin="0,0,0,15"/>
+
+                    <TextBlock Text="Ad:" Style="{DynamicResource LabelTextStyle}"/>
+                    <TextBox Text="{Binding RegisterFirstName, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ModernTextBox}" Margin="0,5,0,15"/>
+
+                    <TextBlock Text="Soyad:" Style="{DynamicResource LabelTextStyle}"/>
+                    <TextBox Text="{Binding RegisterLastName, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ModernTextBox}" Margin="0,5,0,15"/>
+
+                    <TextBlock Text="E-posta:" Style="{DynamicResource LabelTextStyle}"/>
+                    <TextBox Text="{Binding RegisterEmail, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ModernTextBox}" Margin="0,5,0,15"/>
+
+                    <TextBlock Text="Parola:" Style="{DynamicResource LabelTextStyle}"/>
+                    <PasswordBox x:Name="RegisterPasswordBox" Style="{DynamicResource ModernPasswordBox}" Margin="0,5,0,15"/>
+
+                    <Button Content="Kaydol" Command="{Binding RegisterCommand}" Style="{DynamicResource PrimaryButton}" Margin="0,10,0,10"/>
+                    <TextBlock Text="Zaten hesabınız var mı?" HorizontalAlignment="Center" Margin="0,10,0,0" Style="{DynamicResource LinkTextStyle}">
+                        <Hyperlink Command="{Binding ShowLoginViewCommand}">Giriş Yap</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+
+                <!-- Hata Mesajı -->
+                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" HorizontalAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap"/>
+
+            </StackPanel>
+        </Border>
+
+        <!-- Sağ Panel: Resim veya Tanıtım İçeriği -->
+        <Grid Grid.Column="1">
+            <Image Source="/ArchBuilder;component/Assets/Images/architectural_concept.png" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="Yapay Zeka Destekli Mimari Tasarım Asistanınız" Style="{DynamicResource FeatureDescriptionTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30"/>
+        </Grid>
+    </Grid>
+</UserControl>
+

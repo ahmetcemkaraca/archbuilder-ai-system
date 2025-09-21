@@ -1,0 +1,33 @@
+Welcome to ArchBuilder.AI!
+
+Hello{{ ' ' + recipient_name if recipient_name and recipient_name != 'Valued User' else '' }},
+
+Thank you for joining ArchBuilder.AI, the AI-powered architectural design automation platform.
+
+What you can do with ArchBuilder.AI:
+
+🤖 AI-Powered Design
+Generate architectural layouts using natural language descriptions and intelligent algorithms.
+
+📐 Multi-Format Support
+Work with DWG, DXF, IFC, PDF regulations, and seamlessly integrate with Revit.
+
+🌍 Global Compliance
+Ensure your designs meet international building codes and local regulations.
+
+⚡ Rapid Iteration
+Quickly iterate and refine your designs with AI-generated suggestions and optimizations.
+
+Getting Started:
+1. Upload your site plans or requirements
+2. Describe your project in natural language
+3. Review AI-generated design proposals
+4. Refine and export to Revit
+
+Start building now: {{ base_url }}/dashboard
+
+Need help? Contact our support team at support@archbuilder.ai
+
+© 2025 ArchBuilder.AI. All rights reserved.
+Unsubscribe: {{ base_url }}/unsubscribe
+Privacy Policy: {{ base_url }}/privacy

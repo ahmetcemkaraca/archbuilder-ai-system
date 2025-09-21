@@ -1,0 +1,190 @@
+# ArchBuilder.AI Cloud Server Dependencies
+# Python 3.13+ FastAPI backend for AI-powered architectural design automation
+
+# ===== Core FastAPI Framework =====
+fastapi[standard]==0.115.4
+uvicorn[standard]==0.32.0
+gunicorn==21.2.0
+starlette==0.40.0
+
+# ===== Data Validation and Serialization =====
+pydantic==2.9.2
+pydantic-settings==2.6.0
+python-multipart==0.0.12
+email-validator==2.2.0
+
+# ===== Database (Async PostgreSQL + SQLite) =====
+sqlalchemy==2.0.36
+alembic==1.13.3
+asyncpg==0.30.0
+aiosqlite==0.20.0
+psycopg2-binary==2.9.9
+
+# ===== Authentication and Security =====
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.2.0
+cryptography==43.0.1
+
+# ===== Caching and Message Queue =====
+redis==5.1.1
+aioredis==2.0.1
+celery==5.4.0
+kombu==5.4.2
+
+# ===== Monitoring and Logging =====
+structlog==24.4.0
+loguru==0.7.2
+prometheus-client==0.21.0
+sentry-sdk[fastapi]==2.18.0
+
+# ===== AI Model Integration =====
+# OpenAI / GitHub Models
+openai==1.54.4
+anthropic==0.39.0
+
+# Vertex AI (Google Cloud)
+google-cloud-aiplatform==1.71.1
+vertexai==1.71.1
+google-auth==2.36.0
+google-auth-oauthlib==1.2.1
+google-cloud-storage==2.18.0
+
+# Prompt Engineering
+jinja2==3.1.4
+markupsafe==2.1.5
+
+# ===== Vector Database and Embeddings =====
+langchain==0.3.7
+langchain-community==0.3.5
+langchain-google-vertexai==2.0.4
+sentence-transformers==3.1.1
+chromadb==0.5.20
+faiss-cpu==1.9.0
+
+# ===== Document Processing =====
+# PDF Processing
+PyPDF2==3.0.1
+pypdf==5.1.0
+pdfplumber==0.11.4
+
+# CAD File Processing (DWG/DXF)
+ezdxf==1.3.3
+
+# IFC (Building Information Modeling)
+ifcopenshell==0.8.0
+
+# Office Documents
+python-docx==1.1.2
+openpyxl==3.1.5
+
+# OCR and Image Processing
+pytesseract==0.3.13
+Pillow==10.4.0
+opencv-python==4.10.0.84
+
+# ===== Data Processing and ML =====
+numpy==2.1.3
+pandas==2.2.3
+scikit-learn==1.5.2
+scipy==1.14.1
+
+# ===== Text Processing =====
+nltk==3.9.1
+spacy==3.8.2
+textstat==0.7.3
+
+# ===== File Handling and Utilities =====
+aiofiles==24.1.0
+pathlib-mate==1.3.2
+python-magic==0.4.27
+mimetypes-ng==1.0.0
+
+# ===== HTTP and Async =====
+httpx==0.27.2
+aiohttp==3.10.11
+websockets==13.1
+
+# ===== Configuration and Environment =====
+python-dotenv==1.0.1
+dynaconf==3.2.7
+pyyaml==6.0.2
+toml==0.10.2
+
+# ===== Date and Time =====
+python-dateutil==2.9.0.post0
+pytz==2024.2
+pendulum==3.0.0
+
+# ===== Performance and Serialization =====
+orjson==3.10.11
+ujson==5.10.0
+msgpack==1.1.0
+
+# ===== Performance Monitoring =====
+psutil==6.1.0
+memory-profiler==0.61.0
+py-spy==0.3.14
+
+# ===== Development and Testing =====
+pytest==8.3.3
+pytest-asyncio==0.24.0
+pytest-mock==3.14.0
+pytest-cov==6.0.0
+httpx[test]==0.27.2
+factory-boy==3.3.0
+
+# ===== Code Quality =====
+black==24.10.0
+isort==5.13.2
+mypy==1.11.2
+ruff==0.7.1
+pre-commit==3.8.0
+
+# ===== Optional Dependencies for Advanced Features =====
+# Computer Vision (for architectural drawing analysis)
+opencv-contrib-python==4.10.0.84
+
+# 3D Processing (for IFC and Revit integration)
+pythreejs==2.4.2
+vtk==9.3.1
+
+# Geographic Information Systems (for site analysis)
+geopandas==1.0.1
+shapely==2.0.6
+
+# Regional and Internationalization
+babel==2.16.0
+pyicu==2.14
+
+# Payment Processing
+stripe==11.1.1
+
+# Email and Notifications
+fastapi-mail==1.4.1
+jinja2==3.1.4
+aiosmtplib==3.0.2
+email-validator==2.2.0
+premailer==3.10.0
+
+# Background Task Queue
+celery==5.4.0
+redis==5.1.1
+kombu==5.4.2
+dramatiq==1.17.0
+billiard==4.2.1
+flower==2.0.1
+rq==1.17.0
+arq==0.26.1
+
+# ===== Production Dependencies =====
+# WSGI/ASGI servers
+hypercorn==0.17.3
+daphne==4.1.2
+
+# Process management
+supervisor==4.2.5
+
+# Health checks and monitoring
+healthcheck==1.3.3
+prometheus-fastapi-instrumentator==7.0.0
