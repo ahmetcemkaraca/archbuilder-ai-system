@@ -1,0 +1,201 @@
+name: ArchBuilder.AI CI/CD Pipeline
+
+on:
+  push:
+    branches: [ master, main, develop ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  test-cloud-server:
+    runs-on: ubuntu-latest
+    name: Test Cloud Server (Python)
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.13
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.13'
+        
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('src/cloud-server/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          
+    - name: Install dependencies
+      working-directory: src/cloud-server
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-cov pytest-asyncio
+        
+    - name: Run tests with coverage
+      working-directory: src/cloud-server
+      run: |
+        pytest tests/ --cov=app --cov-report=xml --cov-report=html
+        
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: src/cloud-server/coverage.xml
+        flags: cloud-server
+        name: cloud-server-coverage
+
+  build-desktop-app:
+    runs-on: windows-latest
+    name: Build Desktop Application (.NET)
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Restore dependencies
+      working-directory: src/desktop-app
+      run: dotnet restore
+      
+    - name: Build desktop application
+      working-directory: src/desktop-app
+      run: dotnet build --no-restore --configuration Release
+      
+    - name: Run desktop app tests
+      working-directory: src/desktop-app
+      run: dotnet test --no-build --configuration Release --verbosity normal
+
+  build-revit-plugin:
+    runs-on: windows-latest
+    name: Build Revit Plugin (.NET Framework)
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+      
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+      
+    - name: Restore NuGet packages
+      working-directory: src/revit-plugin
+      run: nuget restore ArchBuilderRevit.csproj
+      
+    - name: Build Revit plugin
+      working-directory: src/revit-plugin
+      run: msbuild ArchBuilderRevit.csproj /p:Configuration=Release /p:Platform="Any CPU"
+
+  security-scan:
+    runs-on: ubuntu-latest
+    name: Security Analysis
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Run security scan with Bandit (Python)
+      working-directory: src/cloud-server
+      run: |
+        pip install bandit
+        bandit -r app/ -f json -o bandit-report.json || true
+        
+    - name: Upload security scan results
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-scan-results
+        path: src/cloud-server/bandit-report.json
+
+  code-quality:
+    runs-on: ubuntu-latest
+    name: Code Quality Analysis
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.13'
+        
+    - name: Install quality tools
+      run: |
+        pip install black flake8 mypy
+        
+    - name: Check code formatting (Black)
+      working-directory: src/cloud-server
+      run: black --check app/
+      
+    - name: Run linting (Flake8)
+      working-directory: src/cloud-server
+      run: flake8 app/ --max-line-length=88 --extend-ignore=E203,W503
+      
+    - name: Run type checking (MyPy)
+      working-directory: src/cloud-server
+      run: mypy app/ --ignore-missing-imports
+
+  deploy-staging:
+    runs-on: ubuntu-latest
+    name: Deploy to Staging
+    needs: [test-cloud-server, build-desktop-app, security-scan]
+    if: github.ref == 'refs/heads/develop'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Build Docker image
+      working-directory: src/cloud-server
+      run: |
+        docker build -t archbuilder-ai:staging .
+        
+    - name: Deploy to staging environment
+      run: |
+        echo "🚀 Deploying to staging environment..."
+        # Add actual deployment commands here
+        
+  deploy-production:
+    runs-on: ubuntu-latest
+    name: Deploy to Production
+    needs: [test-cloud-server, build-desktop-app, build-revit-plugin, security-scan, code-quality]
+    if: github.ref == 'refs/heads/master'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Build production Docker image
+      working-directory: src/cloud-server
+      run: |
+        docker build -t archbuilder-ai:latest .
+        
+    - name: Deploy to production environment
+      run: |
+        echo "🚀 Deploying to production environment..."
+        # Add actual deployment commands here
+        
+  update-documentation:
+    runs-on: ubuntu-latest
+    name: Update Documentation
+    if: github.ref == 'refs/heads/master'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Generate API documentation
+      working-directory: src/cloud-server
+      run: |
+        pip install fastapi uvicorn
+        # Generate OpenAPI spec
+        python -c "
+        from main import app
+        import json
+        with open('openapi.json', 'w') as f:
+            json.dump(app.openapi(), f, indent=2)
+        "
+        
+    - name: Update README badges
+      run: |
+        echo "📚 Documentation updated"
