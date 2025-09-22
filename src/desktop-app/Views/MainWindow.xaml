@@ -7,42 +7,218 @@
         xmlns:viewmodels="clr-namespace:ArchBuilder.ViewModels"
         mc:Ignorable="d"
         Title="ArchBuilder.AI - Yapay Zeka Destekli Mimari Tasarım"
-        Height="768" Width="1366"
+        Height="900" Width="1440"
+        MinHeight="600" MinWidth="1024"
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource WindowBackgroundBrush}"
         Foreground="{DynamicResource TextForegroundBrush}"
-        FontFamily="/ArchBuilder;component/Assets/Fonts/#Segoe UI"
+        FontFamily="Segoe UI, -apple-system, BlinkMacSystemFont, sans-serif"
         FontSize="14"
         AllowsTransparency="True"
-        WindowStyle="None">
+        WindowStyle="None"
+        UseLayoutRounding="True"
+        TextOptions.TextFormattingMode="Display"
+        TextOptions.TextRenderingMode="ClearType">
 
     <Window.Resources>
-        <!-- Ortak stiller ve şablonlar buraya eklenebilir -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/AppleTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <!-- Data Templates -->
+            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+                <local:HomeView/>
+            </DataTemplate>
+            
+            <!-- Loading overlay için converter -->
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
     </Window.Resources>
 
-    <Border CornerRadius="10" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="{DynamicResource WindowBorderBrush}" BorderThickness="1">
+    <!-- Ana pencere yapısı - Apple-vari design -->
+    <Border CornerRadius="12" 
+            Background="{DynamicResource WindowBackgroundBrush}" 
+            BorderBrush="{DynamicResource WindowBorderBrush}" 
+            BorderThickness="1"
+            Effect="{x:Null}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/> <!-- Başlık çubuğu -->
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/> <!-- Title bar -->
+                <RowDefinition Height="*"/>   <!-- Content area -->
             </Grid.RowDefinitions>
 
-            <!-- Özel Başlık Çubuğu -->
-            <Grid Grid.Row="0" Background="{DynamicResource TitleBarBackgroundBrush}">
+            <!-- Custom Title Bar - macOS style -->
+            <Grid Grid.Row="0" 
+                  Background="{DynamicResource TitleBarBackgroundBrush}"
+                  MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="ArchBuilder.AI" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="{DynamicResource TitleBarTextForegroundBrush}" FontWeight="SemiBold"/>
-                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Style="{DynamicResource WindowControlButton}" Content="_" Click="MinimizeWindow_Click"/>
-                    <Button Style="{DynamicResource WindowControlButton}" Content="□" Click="MaximizeRestoreWindow_Click"/>
-                    <Button Style="{DynamicResource CloseWindowControlButton}" Content="✕" Click="CloseWindow_Click"/>
+                
+                <!-- macOS style traffic lights -->
+                <StackPanel Grid.Column="0" 
+                            Orientation="Horizontal" 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Margin="16,0,0,0">
+                    <Button x:Name="CloseButton"
+                            Width="13" Height="13"
+                            Background="#FF5F57"
+                            BorderThickness="0"
+                            Margin="0,0,8,0"
+                            Click="CloseWindow_Click"
+                            ToolTip="Kapat">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Ellipse Fill="{TemplateBinding Background}"/>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button x:Name="MinimizeButton"
+                            Width="13" Height="13"
+                            Background="#FFBE2B"
+                            BorderThickness="0"
+                            Margin="0,0,8,0"
+                            Click="MinimizeWindow_Click"
+                            ToolTip="Küçült">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Ellipse Fill="{TemplateBinding Background}"/>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button x:Name="MaximizeButton"
+                            Width="13" Height="13"
+                            Background="#26CA3F"
+                            BorderThickness="0"
+                            Click="MaximizeRestoreWindow_Click"
+                            ToolTip="Tam ekran">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Ellipse Fill="{TemplateBinding Background}"/>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+                
+                <!-- Title -->
+                <TextBlock Grid.Column="1"
+                           Text="{Binding CurrentPageTitle, FallbackValue='ArchBuilder.AI'}" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" 
+                           Foreground="{DynamicResource TitleBarTextForegroundBrush}" 
+                           FontWeight="Medium"
+                           FontSize="13"/>
+                
+                <!-- Right side controls (if needed) -->
+                <StackPanel Grid.Column="2" 
+                            Orientation="Horizontal" 
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Margin="0,0,16,0">
+                    <!-- Additional controls can be added here -->
                 </StackPanel>
             </Grid>
 
-            <!-- Ana İçerik Alanı -->
-            <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
+            <!-- Main Content Area with Navigation -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="280"/>  <!-- Navigation sidebar -->
+                    <ColumnDefinition Width="1"/>    <!-- Separator -->
+                    <ColumnDefinition Width="*"/>    <!-- Content area -->
+                </Grid.ColumnDefinitions>
+
+                <!-- Navigation Sidebar -->
+                <Border Grid.Column="0" 
+                        Background="{StaticResource NavigationGradientBrush}"
+                        CornerRadius="0,0,0,12">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- App Title & Logo -->
+                        <StackPanel Grid.Row="0" 
+                                    Margin="24,24,24,16">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🏗️" FontSize="24" Margin="0,0,8,0"/>
+                                <TextBlock Text="ArchBuilder.AI" 
+                                           FontSize="18" 
+                                           FontWeight="SemiBold"
+                                           Foreground="{StaticResource TextForegroundBrush}"/>
+                            </StackPanel>
+                            <TextBlock Text="Yapay Zeka Destekli Mimari Tasarım" 
+                                       FontSize="11" 
+                                       Foreground="{StaticResource SecondaryTextBrush}"
+                                       Margin="32,4,0,0"/>
+                        </StackPanel>
+
+                        <!-- Navigation Menu -->
+                        <ListBox Grid.Row="1"
+                                 ItemsSource="{Binding NavigationItems}"
+                                 SelectedItem="{Binding SelectedNavigationItem}"
+                                 Style="{StaticResource NavigationListBox}"
+                                 ItemContainerStyle="{StaticResource NavigationListBoxItem}"
+                                 Margin="0,0,0,16"/>
+
+                        <!-- User Info / Settings -->
+                        <Border Grid.Row="2" 
+                                Style="{StaticResource CardPanel}"
+                                Margin="16,8,16,16">
+                            <StackPanel Margin="16,12">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="👤" FontSize="16" Margin="0,0,8,0"/>
+                                    <TextBlock Text="Kullanıcı" 
+                                               FontWeight="Medium"
+                                               FontSize="13"/>
+                                </StackPanel>
+                                <TextBlock Text="Bağlı ve Aktif" 
+                                           FontSize="11" 
+                                           Foreground="{StaticResource SecondaryTextBrush}"
+                                           Margin="24,2,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- Separator -->
+                <Rectangle Grid.Column="1" 
+                           Fill="{StaticResource SeparatorBrush}" 
+                           Width="1"/>
+
+                <!-- Content Area -->
+                <Grid Grid.Column="2">
+                    <!-- Loading Overlay -->
+                    <Border Background="#F0FFFFFF" 
+                            Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            CornerRadius="0,0,12,0">
+                        <Grid>
+                            <StackPanel HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center">
+                                <ProgressBar Style="{StaticResource LoadingSpinner}"
+                                             Width="200"
+                                             Margin="0,0,0,16"/>
+                                <TextBlock Text="Yükleniyor..." 
+                                           FontSize="14"
+                                           Foreground="{StaticResource SecondaryTextBrush}"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <!-- Main Content -->
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  Padding="32,32,32,16">
+                        <ContentControl Content="{Binding CurrentViewModel}" />
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
         </Grid>
     </Border>
 </Window>

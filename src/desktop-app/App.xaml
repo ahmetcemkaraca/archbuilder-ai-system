@@ -6,37 +6,16 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!-- Temel Renkler ve Fırçalar -->
-                <ResourceDictionary>
-                    <SolidColorBrush x:Key="PrimaryBrush" Color="#007AFF"/>
-                    <SolidColorBrush x:Key="SecondaryBrush" Color="#5AC8FA"/>
-                    <SolidColorBrush x:Key="AccentBrush" Color="#FF9500"/>
-                    <SolidColorBrush x:Key="ErrorBrush" Color="#FF3B30"/>
-                    <SolidColorBrush x:Key="SuccessBrush" Color="#34C759"/>
-                    
-                    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#F2F2F7"/>
-                    <SolidColorBrush x:Key="WindowBorderBrush" Color="#E0E0E0"/>
-                    <SolidColorBrush x:Key="TextForegroundBrush" Color="#1C1C1E"/>
-                    <SolidColorBrush x:Key="LightTextForegroundBrush" Color="#636366"/>
-                    <SolidColorBrush x:Key="TextBoxBackgroundBrush" Color="White"/>
-                    <SolidColorBrush x:Key="TextBoxBorderBrush" Color="#E0E0E0"/>
-
-                    <!-- Başlık Çubuğu Renkleri -->
-                    <SolidColorBrush x:Key="TitleBarBackgroundBrush" Color="#FFFFFF"/>
-                    <SolidColorBrush x:Key="TitleBarTextForegroundBrush" Color="#1C1C1E"/>
-                </ResourceDictionary>
-
-                <!-- Kontrol Stilleri -->
-                <ResourceDictionary Source="/ArchBuilder;component/Controls/ModernButton.xaml"/>
-                <ResourceDictionary Source="/ArchBuilder;component/Styles/TextBoxStyles.xaml"/>
-                <ResourceDictionary Source="/ArchBuilder;component/Styles/TextBlockStyles.xaml"/>
-
-                <!-- Converters -->
-                <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+                <!-- Apple-vari Tema -->
+                <ResourceDictionary Source="Styles/AppleTheme.xaml"/>
+                
+                <!-- Mevcut Stiller -->
+                <ResourceDictionary Source="Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="Styles/TextBlockStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <!-- Uygulama genelindeki diğer stiller buraya eklenebilir -->
-
+            <!-- Global Converters -->
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
