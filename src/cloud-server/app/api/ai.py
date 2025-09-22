@@ -1,18 +1,43 @@
 """
 AI processing API endpoints for ArchBuilder.AI
-Implements AI command processing with usage tracking and validation
+Implements AI command processing with comprehensive security, usage tracking, and validation
+following security.instructions.md and api-standards.instructions.md guidelines
 """
 
-from typing import List, Optional
+import asyncio
+import time
+from datetime import datetime
+from typing import List, Optional, Dict, Any
 from uuid import uuid4
 
-from fastapi import APIRouter, Depends, HTTPException, status, Header, BackgroundTasks
-from sqlalchemy.orm import Session
+import structlog
+from fastapi import APIRouter, Depends, HTTPException, status, Header, BackgroundTasks, Request
+from fastapi.security import OAuth2PasswordBearer, APIKeyHeader
+from slowapi import Limiter
+from slowapi.util import get_remote_address
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from ..core.auth.authentication import get_current_user, require_subscription_tier
-from ..core.billing.billing_service import billing_service, track_usage
-from ..core.database import get_db
-from ..models.ai import (
+from app.core.config import get_settings
+from app.core.database import get_db_session
+from app.core.logging import get_correlation_id
+from app.core.exceptions import (
+    AIServiceException,
+    AIModelUnavailableException,
+    ValidationException,
+    NetworkException,
+    RevitAutoPlanException
+)
+from app.security.authentication import (
+    get_current_user,
+    get_current_active_user,
+    verify_subscription,
+    require_subscription_tier
+)
+from app.services.billing_service import BillingService
+from app.services.ai_service import AIService
+from app.services.validation_service import ValidationService
+from app.models.auth.user import User
+from app.models.ai import (
     AICommandRequest,
     AICommandResponse,
     AILayoutRequest,
@@ -21,22 +46,117 @@ from ..models.ai import (
     AIRoomResponse,
     AIValidationRequest,
     AIValidationResponse,
-    AIProgressUpdate
+    AIProgressUpdate,
+    AIModelStatusResponse,
+    AIUsageStatsResponse
 )
-from ..models.subscriptions import SubscriptionTier
-from ..services.ai_service import ai_service
+from app.models.subscriptions import SubscriptionTier
+
+logger = structlog.get_logger(__name__)
+settings = get_settings()
 
 router = APIRouter(prefix="/ai", tags=["ai-processing"])
 
+# Initialize services (will be injected via dependencies)
+def get_ai_service() -> AIService:
+    """Get AI service instance"""
+    return AIService()
+
+def get_billing_service() -> BillingService:
+    """Get billing service instance"""
+    return BillingService()
+
+def get_validation_service() -> ValidationService:
+    """Get validation service instance"""
+    return ValidationService()
+
+# Usage tracking decorator
+def track_ai_usage(operation_type: str, cost_units: int = 1):
+    """Decorator to track AI usage with comprehensive logging and billing"""
+    def decorator(func):
+        async def wrapper(*args, **kwargs):
+            # Extract user and correlation_id from kwargs
+            current_user = kwargs.get('current_user')
+            correlation_id = get_correlation_id()
+            
+            if not current_user:
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="Authentication required for AI operations"
+                )
+            
+            # Check subscription limits before processing
+            billing_service = get_billing_service()
+            session = kwargs.get('session')
+            
+            if session:
+                usage_available = await billing_service.check_usage_limit(
+                    session, current_user.id, operation_type, cost_units
+                )
+                
+                if not usage_available:
+                    logger.warning(
+                        "AI usage limit exceeded",
+                        user_id=current_user.id,
+                        operation_type=operation_type,
+                        cost_units=cost_units,
+                        correlation_id=correlation_id
+                    )
+                    raise HTTPException(
+                        status_code=status.HTTP_402_PAYMENT_REQUIRED,
+                        detail=f"Usage limit exceeded for {operation_type}. Please upgrade your subscription."
+                    )
+            
+            # Execute the actual function
+            start_time = time.time()
+            try:
+                result = await func(*args, **kwargs)
+                
+                # Track successful usage
+                if session:
+                    await billing_service.track_usage(
+                        session, current_user.id, operation_type, cost_units
+                    )
+                
+                processing_time = time.time() - start_time
+                logger.info(
+                    "AI operation completed successfully",
+                    user_id=current_user.id,
+                    operation_type=operation_type,
+                    cost_units=cost_units,
+                    processing_time_ms=round(processing_time * 1000, 2),
+                    correlation_id=correlation_id
+                )
+                
+                return result
+                
+            except Exception as e:
+                processing_time = time.time() - start_time
+                logger.error(
+                    "AI operation failed",
+                    user_id=current_user.id,
+                    operation_type=operation_type,
+                    error=str(e),
+                    processing_time_ms=round(processing_time * 1000, 2),
+                    correlation_id=correlation_id,
+                    exc_info=True
+                )
+                raise
+        
+        return wrapper
+    return decorator
+
 
 @router.post("/commands", response_model=AICommandResponse, status_code=status.HTTP_201_CREATED)
-@track_usage("ai_command_processing", cost_units=5)
+@track_ai_usage("ai_command_processing", cost_units=5)
 async def process_ai_command(
     request: AICommandRequest,
     background_tasks: BackgroundTasks,
-    current_user = Depends(get_current_user),
-    db: Session = Depends(get_db),
-    correlation_id: str = Header(..., alias="X-Correlation-ID")
+    current_user: User = Depends(get_current_active_user),
+    session: AsyncSession = Depends(get_db_session),
+    correlation_id: str = Header(None, alias="X-Correlation-ID"),
+    ai_service: AIService = Depends(get_ai_service),
+    billing_service: BillingService = Depends(get_billing_service)
 ) -> AICommandResponse:
     """
     Process general AI command from natural language input
