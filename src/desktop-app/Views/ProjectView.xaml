@@ -1,0 +1,563 @@
+<UserControl x:Class="ArchBuilder.Views.ProjectView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="1000"
+             FontFamily="Segoe UI"
+             Background="{StaticResource BackgroundBrush}">
+
+    <UserControl.Resources>
+        <!-- Project Card Style -->
+        <Style x:Key="ProjectCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource CardBackgroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CardBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#10000000" BlurRadius="8" ShadowDepth="2" Opacity="0.3"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource CardHoverBrush}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="#20007AFF" BlurRadius="12" ShadowDepth="3" Opacity="0.4"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Project Grid Style -->
+        <Style x:Key="ProjectGridStyle" TargetType="Grid">
+            <Setter Property="Background" Value="{StaticResource CardBackgroundBrush}"/>
+        </Style>
+
+        <!-- File Icon Style -->
+        <Style x:Key="FileIconStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Progress Bar Style -->
+        <Style x:Key="ProjectProgressStyle" TargetType="ProgressBar">
+            <Setter Property="Height" Value="6"/>
+            <Setter Property="Background" Value="{StaticResource CardBorderBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ProgressBar">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="3">
+                            <Border Name="PART_Track" CornerRadius="3">
+                                <Border Name="PART_Indicator" Background="{TemplateBinding Foreground}" 
+                                        HorizontalAlignment="Left" CornerRadius="3"/>
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- File Item Style -->
+        <Style x:Key="FileItemStyle" TargetType="Border">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CardBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="Margin" Value="4,2"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource CardHoverBrush}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header Section -->
+        <Border Grid.Row="0" Background="{StaticResource CardBackgroundBrush}" 
+                BorderBrush="{StaticResource CardBorderBrush}" 
+                BorderThickness="0,0,0,1" 
+                Padding="24,16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Title and Breadcrumbs -->
+                <StackPanel Grid.Column="0" Orientation="Vertical">
+                    <TextBlock Text="Project Management" 
+                               FontSize="28" 
+                               FontWeight="SemiBold" 
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               Margin="0,0,0,4"/>
+                    <TextBlock Text="Manage architectural projects, import CAD files, and track progress" 
+                               FontSize="14" 
+                               Foreground="{StaticResource TextSecondaryBrush}"/>
+                </StackPanel>
+
+                <!-- Action Buttons -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Style="{StaticResource AccentButtonStyle}" 
+                            Command="{Binding CreateNewProjectCommand}"
+                            Margin="0,0,12,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE710;" FontFamily="Segoe MDL2 Assets" Margin="0,0,8,0"/>
+                            <TextBlock Text="New Project"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    <Button Style="{StaticResource SecondaryButtonStyle}" 
+                            Command="{Binding ImportProjectCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE8B5;" FontFamily="Segoe MDL2 Assets" Margin="0,0,8,0"/>
+                            <TextBlock Text="Import Files"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Content -->
+        <ScrollViewer Grid.Row="1" 
+                      VerticalScrollBarVisibility="Auto" 
+                      HorizontalScrollBarVisibility="Disabled"
+                      Padding="24,16">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Quick Stats Cards -->
+                <Grid Grid.Row="0" Margin="0,0,0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Total Projects Card -->
+                    <Border Grid.Column="0" Style="{StaticResource ProjectCardStyle}">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="{Binding TotalProjectsCount}" 
+                                               FontSize="32" 
+                                               FontWeight="Bold" 
+                                               Foreground="{StaticResource AccentBrush}"/>
+                                    <TextBlock Text="Total Projects" 
+                                               FontSize="14" 
+                                               Foreground="{StaticResource TextSecondaryBrush}"/>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" 
+                                           Text="&#xE8F1;" 
+                                           Style="{StaticResource FileIconStyle}"
+                                           FontSize="32"
+                                           Opacity="0.6"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Active Projects Card -->
+                    <Border Grid.Column="1" Style="{StaticResource ProjectCardStyle}">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="{Binding ActiveProjectsCount}" 
+                                               FontSize="32" 
+                                               FontWeight="Bold" 
+                                               Foreground="{StaticResource SuccessColorBrush}"/>
+                                    <TextBlock Text="Active Projects" 
+                                               FontSize="14" 
+                                               Foreground="{StaticResource TextSecondaryBrush}"/>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" 
+                                           Text="&#xE8F3;" 
+                                           Style="{StaticResource FileIconStyle}"
+                                           FontSize="32"
+                                           Foreground="{StaticResource SuccessColorBrush}"
+                                           Opacity="0.6"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Files Imported Card -->
+                    <Border Grid.Column="2" Style="{StaticResource ProjectCardStyle}">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="{Binding TotalFilesCount}" 
+                                               FontSize="32" 
+                                               FontWeight="Bold" 
+                                               Foreground="{StaticResource WarningColorBrush}"/>
+                                    <TextBlock Text="Files Imported" 
+                                               FontSize="14" 
+                                               Foreground="{StaticResource TextSecondaryBrush}"/>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" 
+                                           Text="&#xE8A5;" 
+                                           Style="{StaticResource FileIconStyle}"
+                                           FontSize="32"
+                                           Foreground="{StaticResource WarningColorBrush}"
+                                           Opacity="0.6"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Success Rate Card -->
+                    <Border Grid.Column="3" Style="{StaticResource ProjectCardStyle}">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="{Binding SuccessRate, StringFormat={}{0:F1}%}" 
+                                               FontSize="32" 
+                                               FontWeight="Bold" 
+                                               Foreground="{StaticResource InfoColorBrush}"/>
+                                    <TextBlock Text="Success Rate" 
+                                               FontSize="14" 
+                                               Foreground="{StaticResource TextSecondaryBrush}"/>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" 
+                                           Text="&#xE8FB;" 
+                                           Style="{StaticResource FileIconStyle}"
+                                           FontSize="32"
+                                           Foreground="{StaticResource InfoColorBrush}"
+                                           Opacity="0.6"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Recent Projects Section -->
+                <Border Grid.Row="1" Style="{StaticResource ProjectCardStyle}" Margin="0,0,0,24">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Recent Projects" 
+                                       FontSize="20" 
+                                       FontWeight="SemiBold" 
+                                       Foreground="{StaticResource TextPrimaryBrush}"/>
+                            <Button Grid.Column="1" 
+                                    Style="{StaticResource LinkButtonStyle}" 
+                                    Content="View All"
+                                    Command="{Binding ViewAllProjectsCommand}"/>
+                        </Grid>
+
+                        <!-- Recent Projects List -->
+                        <ItemsControl ItemsSource="{Binding RecentProjects}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Style="{StaticResource FileItemStyle}" 
+                                            MouseLeftButtonUp="ProjectItem_Click"
+                                            Tag="{Binding}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- Project Icon -->
+                                            <Border Grid.Column="0" 
+                                                    Background="{StaticResource AccentBrush}" 
+                                                    CornerRadius="8" 
+                                                    Width="40" 
+                                                    Height="40"
+                                                    Margin="0,0,12,0">
+                                                <TextBlock Text="&#xE8F1;" 
+                                                           FontFamily="Segoe MDL2 Assets" 
+                                                           FontSize="20" 
+                                                           Foreground="White"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+                                            </Border>
+
+                                            <!-- Project Info -->
+                                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Name}" 
+                                                           FontSize="16" 
+                                                           FontWeight="Medium" 
+                                                           Foreground="{StaticResource TextPrimaryBrush}"/>
+                                                <TextBlock Text="{Binding TypeDisplayName}" 
+                                                           FontSize="12" 
+                                                           Foreground="{StaticResource TextSecondaryBrush}"
+                                                           Margin="0,2,0,0"/>
+                                            </StackPanel>
+
+                                            <!-- Progress -->
+                                            <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="16,0">
+                                                <TextBlock Text="{Binding StatusDisplayName}" 
+                                                           FontSize="12" 
+                                                           Foreground="{StaticResource TextSecondaryBrush}"
+                                                           HorizontalAlignment="Right"/>
+                                                <ProgressBar Style="{StaticResource ProjectProgressStyle}" 
+                                                             Value="65" 
+                                                             Width="80"
+                                                             Margin="0,4,0,0"/>
+                                            </StackPanel>
+
+                                            <!-- Last Modified -->
+                                            <TextBlock Grid.Column="3" 
+                                                       Text="{Binding LastModifiedDisplayText}" 
+                                                       FontSize="12" 
+                                                       Foreground="{StaticResource TextSecondaryBrush}"
+                                                       VerticalAlignment="Center"
+                                                       Margin="16,0,0,0"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <!-- Empty State -->
+                        <Border Visibility="{Binding HasRecentProjects, Converter={StaticResource BoolToVisibilityConverter}}"
+                                Background="{StaticResource CardHoverBrush}"
+                                CornerRadius="8"
+                                Padding="32"
+                                Margin="0,16,0,0">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="&#xE8F1;" 
+                                           FontFamily="Segoe MDL2 Assets" 
+                                           FontSize="48" 
+                                           Foreground="{StaticResource TextSecondaryBrush}"
+                                           HorizontalAlignment="Center"
+                                           Margin="0,0,0,16"/>
+                                <TextBlock Text="No recent projects" 
+                                           FontSize="18" 
+                                           FontWeight="Medium" 
+                                           Foreground="{StaticResource TextSecondaryBrush}"
+                                           HorizontalAlignment="Center"
+                                           Margin="0,0,0,8"/>
+                                <TextBlock Text="Create your first project to get started with ArchBuilder.AI" 
+                                           FontSize="14" 
+                                           Foreground="{StaticResource TextTertiaryBrush}"
+                                           HorizontalAlignment="Center"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- File Import Section -->
+                <Border Grid.Row="2" Style="{StaticResource ProjectCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Quick File Import" 
+                                   FontSize="20" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                   Margin="0,0,0,16"/>
+
+                        <!-- File Type Cards -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- DWG Import -->
+                            <Border Grid.Column="0" 
+                                    Style="{StaticResource FileItemStyle}"
+                                    Background="{StaticResource CardHoverBrush}"
+                                    Cursor="Hand"
+                                    MouseLeftButtonUp="ImportFile_Click"
+                                    Tag="DWG">
+                                <StackPanel HorizontalAlignment="Center" Padding="16">
+                                    <TextBlock Text="&#xE8A5;" 
+                                               Style="{StaticResource FileIconStyle}"
+                                               FontSize="32"
+                                               Margin="0,0,0,8"/>
+                                    <TextBlock Text="AutoCAD DWG" 
+                                               FontSize="14" 
+                                               FontWeight="Medium" 
+                                               Foreground="{StaticResource TextPrimaryBrush}"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Import CAD drawings" 
+                                               FontSize="12" 
+                                               Foreground="{StaticResource TextSecondaryBrush}"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- DXF Import -->
+                            <Border Grid.Column="1" 
+                                    Style="{StaticResource FileItemStyle}"
+                                    Background="{StaticResource CardHoverBrush}"
+                                    Cursor="Hand"
+                                    MouseLeftButtonUp="ImportFile_Click"
+                                    Tag="DXF">
+                                <StackPanel HorizontalAlignment="Center" Padding="16">
+                                    <TextBlock Text="&#xE8A5;" 
+                                               Style="{StaticResource FileIconStyle}"
+                                               FontSize="32"
+                                               Margin="0,0,0,8"/>
+                                    <TextBlock Text="AutoCAD DXF" 
+                                               FontSize="14" 
+                                               FontWeight="Medium" 
+                                               Foreground="{StaticResource TextPrimaryBrush}"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Exchange format" 
+                                               FontSize="12" 
+                                               Foreground="{StaticResource TextSecondaryBrush}"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- IFC Import -->
+                            <Border Grid.Column="2" 
+                                    Style="{StaticResource FileItemStyle}"
+                                    Background="{StaticResource CardHoverBrush}"
+                                    Cursor="Hand"
+                                    MouseLeftButtonUp="ImportFile_Click"
+                                    Tag="IFC">
+                                <StackPanel HorizontalAlignment="Center" Padding="16">
+                                    <TextBlock Text="&#xE8D2;" 
+                                               Style="{StaticResource FileIconStyle}"
+                                               FontSize="32"
+                                               Margin="0,0,0,8"/>
+                                    <TextBlock Text="IFC Models" 
+                                               FontSize="14" 
+                                               FontWeight="Medium" 
+                                               Foreground="{StaticResource TextPrimaryBrush}"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="BIM exchange format" 
+                                               FontSize="12" 
+                                               Foreground="{StaticResource TextSecondaryBrush}"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- PDF Import -->
+                            <Border Grid.Column="3" 
+                                    Style="{StaticResource FileItemStyle}"
+                                    Background="{StaticResource CardHoverBrush}"
+                                    Cursor="Hand"
+                                    MouseLeftButtonUp="ImportFile_Click"
+                                    Tag="PDF">
+                                <StackPanel HorizontalAlignment="Center" Padding="16">
+                                    <TextBlock Text="&#xE8A0;" 
+                                               Style="{StaticResource FileIconStyle}"
+                                               FontSize="32"
+                                               Margin="0,0,0,8"/>
+                                    <TextBlock Text="PDF Plans" 
+                                               FontSize="14" 
+                                               FontWeight="Medium" 
+                                               Foreground="{StaticResource TextPrimaryBrush}"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Regulations & plans" 
+                                               FontSize="12" 
+                                               Foreground="{StaticResource TextSecondaryBrush}"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <!-- Drag and Drop Area -->
+                        <Border Background="{StaticResource CardBorderBrush}"
+                                BorderBrush="{StaticResource AccentBrush}"
+                                BorderThickness="2"
+                                CornerRadius="8"
+                                Padding="32"
+                                Margin="0,24,0,0"
+                                AllowDrop="True"
+                                Drop="DropArea_Drop"
+                                DragOver="DropArea_DragOver"
+                                DragLeave="DropArea_DragLeave">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="&#xE8B5;" 
+                                           FontFamily="Segoe MDL2 Assets" 
+                                           FontSize="48" 
+                                           Foreground="{StaticResource AccentBrush}"
+                                           HorizontalAlignment="Center"
+                                           Margin="0,0,0,16"/>
+                                <TextBlock Text="Drag and drop files here" 
+                                           FontSize="18" 
+                                           FontWeight="Medium" 
+                                           Foreground="{StaticResource TextPrimaryBrush}"
+                                           HorizontalAlignment="Center"
+                                           Margin="0,0,0,8"/>
+                                <TextBlock Text="or click to browse for DWG, DXF, IFC, and PDF files" 
+                                           FontSize="14" 
+                                           Foreground="{StaticResource TextSecondaryBrush}"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- Loading Overlay -->
+        <Border Grid.RowSpan="2" 
+                Background="#80000000"
+                Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Border Background="{StaticResource CardBackgroundBrush}"
+                    BorderBrush="{StaticResource CardBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="32"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                <StackPanel>
+                    <ProgressBar IsIndeterminate="True"
+                                 Width="200"
+                                 Height="4"
+                                 Background="{StaticResource CardBorderBrush}"
+                                 Foreground="{StaticResource AccentBrush}"
+                                 Margin="0,0,0,16"/>
+                    <TextBlock Text="{Binding LoadingMessage}" 
+                               FontSize="16" 
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </Border>
+    </Grid>
+</UserControl>

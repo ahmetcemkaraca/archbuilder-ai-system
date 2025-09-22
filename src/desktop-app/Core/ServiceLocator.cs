@@ -36,18 +36,23 @@ namespace ArchBuilder.Core
                 builder.SetMinimumLevel(LogLevel.Information);
             });
 
-            // ViewModels
+            // ViewModels - Updated with ProjectViewModel
             services.AddTransient<ArchBuilder.ViewModels.HomeViewModel>();
-            services.AddTransient<ArchBuilder.ViewModels.ProjectsViewModel>();
+            services.AddTransient<ArchBuilder.ViewModels.ProjectViewModel>(); // Updated to use ProjectViewModel
             services.AddTransient<ArchBuilder.ViewModels.AIDesignViewModel>();
             services.AddTransient<ArchBuilder.ViewModels.AnalysisViewModel>();
             services.AddTransient<ArchBuilder.ViewModels.SettingsViewModel>();
 
-            // Services
+            // Services - Updated with new file import services
             services.AddSingleton<IProjectService, ProjectService>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IFileProcessingService, FileProcessingService>();
             services.AddSingleton<ICloudApiService, CloudApiService>();
+            
+            // New file import services following security standards
+            services.AddSingleton<ArchBuilder.Services.IFileImportService, ArchBuilder.Services.FileImportService>();
+            services.AddSingleton<ArchBuilder.Services.ICloudStorageService, ArchBuilder.Services.CloudStorageService>();
+            services.AddSingleton<ArchBuilder.Services.IVirusScanService, ArchBuilder.Services.VirusScanService>();
         }
 
         /// <summary>

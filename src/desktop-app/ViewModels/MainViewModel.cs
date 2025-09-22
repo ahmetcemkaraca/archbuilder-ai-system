@@ -245,10 +245,19 @@ namespace ArchBuilder.ViewModels
 
         private async Task NavigateToProjectsAsync()
         {
-            // ProjectsViewModel oluştur ve ayarla
-            var projectsViewModel = ServiceLocator.GetService<ProjectsViewModel>();
-            await projectsViewModel.LoadProjectsAsync();
-            CurrentViewModel = projectsViewModel;
+            // ProjectViewModel oluştur ve ayarla (ProjectView için güncellenmiş ViewModel)
+            var projectViewModel = ServiceLocator.GetService<ProjectViewModel>();
+            if (projectViewModel == null)
+            {
+                // Fallback olarak yeni instance oluştur
+                projectViewModel = new ProjectViewModel();
+            }
+            
+            // Veri yüklenmesi beklenmez çünkü ProjectViewModel kendi başlatma işlemini yapar
+            await Task.Delay(100); // UI responsiveness için küçük gecikme
+            CurrentViewModel = projectViewModel;
+            
+            _logger?.LogInformation("Navigated to Projects view with ProjectViewModel");
         }
 
         private async Task NavigateToAIDesignAsync()
