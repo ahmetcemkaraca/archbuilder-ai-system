@@ -6,6 +6,49 @@ You are tasked with creating "ArchBuilder.AI", a Windows masaüstü uygulaması 
 
 ## 🔧 MANDATORY DEVELOPMENT WORKFLOW
 
+### 🌟 GIT BRANCH WORKFLOW (NEW REQUIREMENT)
+**ALWAYS** work with feature branches for every task/implementation:
+
+#### Git Branch Strategy:
+1. **Create Feature Branch**: Before starting any task, create a new branch from master
+   ```bash
+   git checkout master
+   git pull origin master
+   git checkout -b feature/task-name-description
+   ```
+
+2. **Branch Naming Convention**:
+   - `feature/mainwindow-implementation`
+   - `feature/project-management-views`
+   - `feature/revit-commands-core`
+   - `bugfix/issue-description`
+   - `docs/update-instructions`
+
+3. **Work on Feature Branch**: 
+   - Make all commits to the feature branch
+   - Use descriptive commit messages with conventional commits format
+   - Push feature branch to origin regularly
+
+4. **Submit for Review**:
+   - When task is complete, push final branch to origin
+   - DO NOT merge to master directly
+   - Human reviewer will merge after approval
+
+5. **Example Workflow**:
+   ```bash
+   # Start new task
+   git checkout master
+   git pull origin master
+   git checkout -b feature/project-management-views
+   
+   # Work and commit
+   git add .
+   git commit -m "feat: implement project dashboard UI"
+   git push origin feature/project-management-views
+   
+   # Continue until task complete, then wait for merge approval
+   ```
+
 ### Before ANY Function Implementation or Code Fix:
 **ALWAYS** read the relevant `*.instructions.md` files from `.github/instructions/` directory before writing or modifying any code. This is **NON-NEGOTIABLE** and ensures consistency, security, and quality across the entire codebase.
 
